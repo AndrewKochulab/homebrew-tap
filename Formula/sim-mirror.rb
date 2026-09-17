@@ -3,18 +3,19 @@ class SimMirror < Formula
 
   desc "Mirror and drive the iOS Simulator from AI agents and the browser"
   homepage "https://github.com/AndrewKochulab/sim-mirror"
-  url "https://files.pythonhosted.org/packages/5c/80/d197f48665454dac41d2fdad016e6c5c2bb04bd76d2c10e200655ca5537e/sim_mirror-1.0.0.tar.gz"
-  sha256 "f44e5e1ab04e161e32eaae3a799c8ff271a85f2a88985d8454239f6c30152241"
+  url "https://files.pythonhosted.org/packages/d1/10/f08c96dfa58bcb7eefd5a00f99d664255020c6f328aaea2c4daa139c5e52/sim_mirror-1.2.0.tar.gz"
+  sha256 "2ba9f1353aebc8ff3147ccc96d90cb76af557dc05c95b4dca01026940900d431"
   license "Apache-2.0"
 
   depends_on "libyaml"
   depends_on :macos
+  depends_on "pillow"
   depends_on "pydantic"
   depends_on "python@3.13"
 
-  # pydantic comes bottled from homebrew-core, and uvicorn's watchfiles (Rust, only for --reload) is left out;
-  # anyio and idna stay, which starlette needs.
-  pypi_packages exclude_packages: %w[pydantic watchfiles],
+  # pydantic and pillow come bottled from homebrew-core, and uvicorn's watchfiles (Rust, only for --reload) is left
+  # out; anyio and idna stay, which starlette needs.
+  pypi_packages exclude_packages: %w[pillow pydantic watchfiles],
                 extra_packages:   %w[anyio idna]
 
   resource "annotated-doc" do
@@ -123,8 +124,9 @@ class SimMirror < Formula
 
   def caveats
     <<~EOS
-      Driving a simulator needs Xcode. Touching its screen needs idb_companion:
-        brew install facebook/fb/idb-companion
+      Driving a simulator needs Xcode. SimMirror drives it with its own native helper,
+      which this install builds once with the Xcode it uses:
+        sim-mirror helper build
       Then see what this Mac has:
         sim-mirror doctor
     EOS
