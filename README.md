@@ -18,4 +18,5 @@ minutes. Driving a simulator needs Xcode; touching its screen needs idb_companio
 day, it updates the formula's URL, checksum and Python resources, builds and tests it on macOS, and commits it. To run
 it now, start the workflow by hand.
 
-[tests.yml](.github/workflows/tests.yml) checks every pull request and push with `brew test-bot`.
+[tests.yml](.github/workflows/tests.yml) checks every pull request and push with `brew test-bot`; started by hand, it
+builds and tests every formula.

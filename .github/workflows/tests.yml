@@ -5,6 +5,8 @@ on:
     branches:
       - main
   pull_request:
+  # By hand, to build and test every formula in the tap.
+  workflow_dispatch:
 
 permissions: {}
 
@@ -38,4 +40,11 @@ jobs:
 
       - run: brew test-bot --only-tap-syntax
 
-      - run: brew test-bot --only-formulae --skip-online-checks
+      - run: brew test-bot --only-formulae
+        if: github.event_name == 'pull_request'
+
+      - name: brew test-bot --only-formulae, every formula
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          TAP: ${{ steps.set-up-homebrew.outputs.tap-name }}
+        run: brew test-bot --only-formulae --testing-formulae="$(brew tap-info --json "$TAP" | jq -r '.[0].formula_names | join(",")')"
