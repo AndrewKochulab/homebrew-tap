@@ -1,0 +1,80 @@
+name: Bump sim-mirror
+
+# Once a day, and by hand: when PyPI has a newer SimMirror that has been out for a day (Homebrew's own release
+# cooldown), update the formula, build and test it from source, and commit it to main.
+
+on:
+  schedule:
+    - cron: "23 7 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: bump
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash -xeuo pipefail {0}
+
+env:
+  FORMULA: andrewkochulab/tap/sim-mirror
+  PACKAGE: sim-mirror
+  HOMEBREW_NO_INSTALL_FROM_API: 1
+
+jobs:
+  bump:
+    runs-on: macos-26
+    permissions:
+      contents: write
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@f8d4222eb633e65c2a0157383cf80861fc7fae7f # 2026.09.07.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up git
+        id: git_setup
+        uses: Homebrew/actions/git-user-config@f8d4222eb633e65c2a0157383cf80861fc7fae7f # 2026.09.07.1
+
+      - name: Find a release past the cooldown
+        id: release
+        run: |
+          current="$(brew info --json=v2 "$FORMULA" | jq -r '.formulae[0].versions.stable')"
+          pypi="$(curl -fsSL "https://pypi.org/pypi/$PACKAGE/json")"
+          latest="$(jq -r '.info.version' <<<"$pypi")"
+          uploaded="$(jq -r --arg v "$latest" '[.releases[$v][].upload_time_iso_8601] | min' <<<"$pypi")"
+          age=$(( $(date -u +%s) - $(date -u -j -f "%Y-%m-%dT%H:%M:%S" "${uploaded%%.*}" +%s) ))
+          newest="$(printf '%s\n%s\n' "$current" "$latest" | sort -V | tail -n 1)"
+          if [[ "$latest" == "$current" || "$newest" != "$latest" ]]; then
+            echo "The formula has $current, the newest on PyPI."
+          elif (( age < 86400 )); then
+            echo "::notice::$PACKAGE $latest was uploaded less than a day ago; the next run picks it up."
+          else
+            echo "version=$latest" >>"$GITHUB_OUTPUT"
+          fi
+
+      - name: Update the formula
+        if: steps.release.outputs.version
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: brew bump-formula-pr --write-only --no-audit --version="$VERSION" "$FORMULA"
+
+      - name: Build, test and audit it
+        if: steps.release.outputs.version
+        run: |
+          brew install --build-from-source "$FORMULA"
+          brew test "$FORMULA"
+          brew audit --strict --online --formula "$FORMULA"
+          brew style "$FORMULA"
+
+      - name: Commit it
+        if: steps.release.outputs.version
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+          TAP: ${{ steps.set-up-homebrew.outputs.repository-path }}
+        run: |
+          git -C "$TAP" commit --all --message "sim-mirror $VERSION"
+          git -C "$TAP" push origin HEAD:main
