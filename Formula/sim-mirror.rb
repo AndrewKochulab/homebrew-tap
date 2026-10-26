@@ -3,8 +3,8 @@ class SimMirror < Formula
 
   desc "Mirror and drive the iOS Simulator from AI agents and the browser"
   homepage "https://github.com/AndrewKochulab/sim-mirror"
-  url "https://files.pythonhosted.org/packages/72/72/0c706092124eb02069c951e6975dfe1595d73a1948bcc8d32a7ef41c22e5/sim_mirror-2.0.1.tar.gz"
-  sha256 "ad8e0fc0242452d3cafec2ac19afee5bc29f6a59f0d24a59ab3eb3f94964ba38"
+  url "https://files.pythonhosted.org/packages/eb/65/9d1c4fdfdc33b20a2f58410af9ef156beb7fece5c2a586d40f786628c364/sim_mirror-2.2.0.tar.gz"
+  sha256 "662227a691936512c40d781a82b7a3c165f6d3b5f0dedecb537bb455cd881680"
   license "Apache-2.0"
 
   depends_on "libyaml"
@@ -14,9 +14,10 @@ class SimMirror < Formula
   depends_on "python@3.13"
 
   # pydantic and pillow come bottled from homebrew-core, and uvicorn's watchfiles (Rust, only for --reload) is left
-  # out; anyio and idna stay, which starlette needs.
+  # out; anyio and idna stay, which starlette needs, and typing-extensions, which opentelemetry-api imports itself --
+  # left out with pydantic, whose dependency it also is, `sim-mirror` could not start (2.1.0 on).
   pypi_packages exclude_packages: %w[pillow pydantic watchfiles],
-                extra_packages:   %w[anyio idna]
+                extra_packages:   %w[anyio idna typing-extensions]
 
   resource "annotated-doc" do
     url "https://files.pythonhosted.org/packages/5a/8e/38aa427ed5402449e226975b649c5dc73ccadfefeb95e6aecb8f8ea4b6b6/annotated_doc-0.0.5.tar.gz"
@@ -34,8 +35,8 @@ class SimMirror < Formula
   end
 
   resource "fastapi" do
-    url "https://files.pythonhosted.org/packages/56/4f/f7c30a73127e0a8bbffe788369b8359e530b01ae06e2757936fa35bc5e6d/fastapi-0.142.2.tar.gz"
-    sha256 "06366626f2e70576367714d9ab2fe8472e6c8456dba69b399f9f797ab5e92570"
+    url "https://files.pythonhosted.org/packages/e9/eb/2cf8c80abf09b2800aef0a83b41066fbfda8ee5495b7a08b9d1af40f7046/fastapi-0.162.0.tar.gz"
+    sha256 "6a22c1e2e6e32e0633ee7e170f00009a29b8228b16feb219ee42f32fd8d88a8f"
   end
 
   resource "grpclib" do
@@ -59,8 +60,8 @@ class SimMirror < Formula
   end
 
   resource "httptools" do
-    url "https://files.pythonhosted.org/packages/43/e5/d471fcb0e14523fe1c3f4ba58ca52480e7bd70ad7109a3846bc75892f7fb/httptools-0.8.0.tar.gz"
-    sha256 "6b2a32f18d97e16e90827d7a819ffa8dbd8cc245fc4e1fa9d1095b54ef4bd999"
+    url "https://files.pythonhosted.org/packages/3a/ec/deed52912ab7ca6c0b12859330c571c60c61d7267b341b28951fcbf13694/httptools-0.9.0.tar.gz"
+    sha256 "d484ebb7e3a3f3597b0f645fbd1b85633674ca808c1f5ba11c2caf7c66f5c8b6"
   end
 
   resource "hyperframe" do
@@ -74,13 +75,13 @@ class SimMirror < Formula
   end
 
   resource "multidict" do
-    url "https://files.pythonhosted.org/packages/c4/64/642465a4827331a98ba4ae29f97658be25d1bdcb868872a2f78f7482b507/multidict-7.0.0.tar.gz"
-    sha256 "a7fcd089a0af2e0ef053c0d39c22c9ebf2434dddcb91034fd2f59ec99623788e"
+    url "https://files.pythonhosted.org/packages/7b/6b/29ef8e752f5854dcc267ded0652c475bec99b86f255957a0d4fcad657b18/multidict-7.2.1.tar.gz"
+    sha256 "e8af3e6f1bdbc31fd762b094133b478b89988eaebc63cbe82b1d9e3bbd15cede"
   end
 
   resource "opentelemetry-api" do
-    url "https://files.pythonhosted.org/packages/1f/dc/e12c1fe1ed8a7b7149777127b1a0e12ce5bd5a81d97408bedc2128c260f5/opentelemetry_api-1.45.0.tar.gz"
-    sha256 "711ede81773c8025c2c03dac0450bc89f3d30aea6eabcc815c570d4e35a963f7"
+    url "https://files.pythonhosted.org/packages/2e/02/6e0ae9cc61bd3169d401077b507b3ebc344745171e1051ab430be012dcd9/opentelemetry_api-1.45.1.tar.gz"
+    sha256 "aa38ed19bcc084ba42782a73255b3582283eced7ad6dddbd6695189e69adfb75"
   end
 
   resource "protobuf" do
@@ -89,8 +90,8 @@ class SimMirror < Formula
   end
 
   resource "python-dotenv" do
-    url "https://files.pythonhosted.org/packages/6a/53/ed9d74092561d4b01a2ef1349d52cdbc135e526c245f366b089cfca6de49/python_dotenv-1.2.3.tar.gz"
-    sha256 "a20a594dabeaa385725aa239d5244871c143ecb356add8a20fcf23773a6c3a35"
+    url "https://files.pythonhosted.org/packages/74/26/2fbeedb218a787a5eea551c7532cac4e009f83d689dd2faa0d0353473f86/python_dotenv-1.2.4.tar.gz"
+    sha256 "f0d53e69935a851c0dcc78f3ab7aaccd8cabef0b92382b576b824212902873c0"
   end
 
   resource "pyyaml" do
@@ -99,13 +100,18 @@ class SimMirror < Formula
   end
 
   resource "starlette" do
-    url "https://files.pythonhosted.org/packages/7b/2b/3850dc6bf7ef71b088962eba31dafc6cffd2f96e577ebb0bb316df96da3e/starlette-1.7.0.tar.gz"
-    sha256 "c79f74ea63cff761804fbbfb182f1e0b440c2d07b164d24700c5a1bab5d6ff5d"
+    url "https://files.pythonhosted.org/packages/48/bb/3d8757f21e9a53d9035c9eb039a777047139a16bfdbedfc7a58241c3d914/starlette-1.10.0.tar.gz"
+    sha256 "b8399098d4c1e3522734f7235dc79b1fc967f96cf139c81e0fa30479e0685f9b"
   end
 
   resource "tomlkit" do
-    url "https://files.pythonhosted.org/packages/94/96/e07752635b98536177fa1f37671c8f3cdde2e724c6bcf6034b2cfb571565/tomlkit-0.15.1.tar.gz"
-    sha256 "e25bbf38843005246210a12982776f27f99cb9be67160e14434d0c0d21ee1e97"
+    url "https://files.pythonhosted.org/packages/08/72/fc01563df95c189a9f65850096bdc205bc2fe37da6c740cd64afaf18d07e/tomlkit-0.15.2.tar.gz"
+    sha256 "83e32755ba1d20d9340bd069ee97e9f6232ba2346b63ffcba425de01f7e327a6"
+  end
+
+  resource "typing-extensions" do
+    url "https://files.pythonhosted.org/packages/f6/cc/6253133b5bb138fc3306cebfbda2c520f545d36b5be2c7255cc528bb45d6/typing_extensions-4.16.0.tar.gz"
+    sha256 "dc983d19a509c94dba722ee6abd33940f7c05a89e243c47e907eb4db6f1a43e5"
   end
 
   resource "uvicorn" do
@@ -114,13 +120,13 @@ class SimMirror < Formula
   end
 
   resource "uvloop" do
-    url "https://files.pythonhosted.org/packages/06/f0/18d39dbd1971d6d62c4629cc7fa67f74821b0dc1f5a77af43719de7936a7/uvloop-0.22.1.tar.gz"
-    sha256 "6c84bae345b9147082b17371e3dd5d42775bddce91f885499017f4607fdaf39f"
+    url "https://files.pythonhosted.org/packages/fa/42/02c739ce85fb2ee8d99212c61417da8140c6b87e9d97c430bea520d76044/uvloop-0.23.0.tar.gz"
+    sha256 "28d160f51ab4da3b187063652e643dea6831072add4adc1e6d62afbe73b6be27"
   end
 
   resource "websockets" do
-    url "https://files.pythonhosted.org/packages/18/72/fba934cb3dff7a85d811820efffcd141ddd52b5a2a01637f64551373ff4d/websockets-17.1.tar.gz"
-    sha256 "acfea4c20bf54384883ea33b1240fc1db4f52e190823a4e2b334bc3e8bfca96a"
+    url "https://files.pythonhosted.org/packages/30/4b/4692be6d5bf739ed049b3813901c42091f8c054df89d5c089343823dea0d/websockets-17.3.tar.gz"
+    sha256 "1c7dd93a1c9f89297471493674b1fc1d9467cafd45374f2172213046bdb3a329"
   end
 
   def install
