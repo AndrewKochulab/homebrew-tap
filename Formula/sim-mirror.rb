@@ -11,11 +11,12 @@ class SimMirror < Formula
   depends_on :macos
   depends_on "pillow"
   depends_on "pydantic"
-  depends_on "python@3.13"
+  depends_on "python@3.14"
 
-  # pydantic and pillow come bottled from homebrew-core, and uvicorn's watchfiles (Rust, only for --reload) is left
-  # out; anyio and idna stay, which starlette needs, and typing-extensions, which opentelemetry-api imports itself --
-  # left out with pydantic, whose dependency it also is, `sim-mirror` could not start (2.1.0 on).
+  # pydantic and pillow come bottled from homebrew-core, built for python@3.14 and later, so the virtualenv is on
+  # 3.14; uvicorn's watchfiles (Rust, only for --reload) is left out. anyio and idna stay, which starlette needs, and
+  # typing-extensions, which opentelemetry-api imports itself: left out with pydantic, whose dependency it also is,
+  # sim-mirror 2.1.0 and later could not start.
   pypi_packages exclude_packages: %w[pillow pydantic watchfiles],
                 extra_packages:   %w[anyio idna typing-extensions]
 
