@@ -3,8 +3,8 @@ class SimMirror < Formula
 
   desc "Mirror and drive the iOS Simulator from AI agents and the browser"
   homepage "https://github.com/AndrewKochulab/sim-mirror"
-  url "https://files.pythonhosted.org/packages/eb/65/9d1c4fdfdc33b20a2f58410af9ef156beb7fece5c2a586d40f786628c364/sim_mirror-2.2.0.tar.gz"
-  sha256 "662227a691936512c40d781a82b7a3c165f6d3b5f0dedecb537bb455cd881680"
+  url "https://files.pythonhosted.org/packages/99/39/0ecd08f7a605759a1474eb5248a01ba7b3874665e6c3ee3b5385d004a0b5/sim_mirror-2.4.0.tar.gz"
+  sha256 "ac1cbdd4314e8848d087e7908318d9f7477b006c1bb37cb74fefccd70d58ca9a"
   license "Apache-2.0"
 
   depends_on "libyaml"
