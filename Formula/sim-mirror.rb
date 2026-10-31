@@ -3,8 +3,8 @@ class SimMirror < Formula
 
   desc "Mirror and drive the iOS Simulator from AI agents and the browser"
   homepage "https://github.com/AndrewKochulab/sim-mirror"
-  url "https://files.pythonhosted.org/packages/99/39/0ecd08f7a605759a1474eb5248a01ba7b3874665e6c3ee3b5385d004a0b5/sim_mirror-2.4.0.tar.gz"
-  sha256 "ac1cbdd4314e8848d087e7908318d9f7477b006c1bb37cb74fefccd70d58ca9a"
+  url "https://files.pythonhosted.org/packages/a9/20/997d173d51be90f6feb6714d4e7ddf82030dcd6b07885991db40eda25316/sim_mirror-2.5.0.tar.gz"
+  sha256 "665faa8c70730a4801aeb7f21647592a3633b5bf6e127faacdf3ef68e657c13e"
   license "Apache-2.0"
 
   depends_on "libyaml"
@@ -81,8 +81,8 @@ class SimMirror < Formula
   end
 
   resource "opentelemetry-api" do
-    url "https://files.pythonhosted.org/packages/2e/02/6e0ae9cc61bd3169d401077b507b3ebc344745171e1051ab430be012dcd9/opentelemetry_api-1.45.1.tar.gz"
-    sha256 "aa38ed19bcc084ba42782a73255b3582283eced7ad6dddbd6695189e69adfb75"
+    url "https://files.pythonhosted.org/packages/19/14/cf3a6b6448849656e1e5f4e2101f3988dc6789724050096aba1bc5ccf592/opentelemetry_api-1.45.2.tar.gz"
+    sha256 "d7b0008e21e5fd61cbe7a7f34ca3b6905a78ab677d9bc395e299359c75cda6b4"
   end
 
   resource "protobuf" do
