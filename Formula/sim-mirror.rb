@@ -3,8 +3,8 @@ class SimMirror < Formula
 
   desc "Mirror and drive the iOS Simulator from AI agents and the browser"
   homepage "https://github.com/AndrewKochulab/sim-mirror"
-  url "https://files.pythonhosted.org/packages/a9/20/997d173d51be90f6feb6714d4e7ddf82030dcd6b07885991db40eda25316/sim_mirror-2.5.0.tar.gz"
-  sha256 "665faa8c70730a4801aeb7f21647592a3633b5bf6e127faacdf3ef68e657c13e"
+  url "https://files.pythonhosted.org/packages/1b/58/3dce680ceaf0d782b566bbc6fa87a637e2982bef5d05d1014f51c5c78170/sim_mirror-3.0.1.tar.gz"
+  sha256 "bcfc1d0a922b26d41151d0ed8c169c9ab0afe3a47dcf5bf92c3f6b4197bbb1a8"
   license "Apache-2.0"
 
   depends_on "libyaml"
@@ -26,8 +26,8 @@ class SimMirror < Formula
   end
 
   resource "anyio" do
-    url "https://files.pythonhosted.org/packages/a9/d2/f4d173e22df740bc37b1db102b386ba719b66e95b0f0d751f556b387e6d2/anyio-4.15.1.tar.gz"
-    sha256 "9f28306018cbd6d329e64a36d58256edff76dd996fe423bc957326e578b82a94"
+    url "https://files.pythonhosted.org/packages/a1/98/7e457a3b014976887a050561955c0b76e1e7e2d6e27b78ecef2ef80518f2/anyio-4.16.0.tar.gz"
+    sha256 "59bb03251907983d1603d27c3087ddb1e93299ea2163adcdba37899a4fb12ffb"
   end
 
   resource "click" do
@@ -126,8 +126,8 @@ class SimMirror < Formula
   end
 
   resource "websockets" do
-    url "https://files.pythonhosted.org/packages/30/4b/4692be6d5bf739ed049b3813901c42091f8c054df89d5c089343823dea0d/websockets-17.3.tar.gz"
-    sha256 "1c7dd93a1c9f89297471493674b1fc1d9467cafd45374f2172213046bdb3a329"
+    url "https://files.pythonhosted.org/packages/75/79/590c5f0cc7d1661195aeefccb0e342b79f4c77d368d526d028821a390332/websockets-17.4.tar.gz"
+    sha256 "09d3939b70df0c8ad2da145ebd50978bccaee1d565e838b0e7921a34d38571eb"
   end
 
   def install
