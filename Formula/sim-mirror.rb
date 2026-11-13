@@ -3,8 +3,8 @@ class SimMirror < Formula
 
   desc "Mirror and drive the iOS Simulator from AI agents and the browser"
   homepage "https://github.com/AndrewKochulab/sim-mirror"
-  url "https://files.pythonhosted.org/packages/1b/58/3dce680ceaf0d782b566bbc6fa87a637e2982bef5d05d1014f51c5c78170/sim_mirror-3.0.1.tar.gz"
-  sha256 "bcfc1d0a922b26d41151d0ed8c169c9ab0afe3a47dcf5bf92c3f6b4197bbb1a8"
+  url "https://files.pythonhosted.org/packages/04/48/11ba771347dbb53440a8348f20099b43b7d7ee99493df9611495cd568785/sim_mirror-3.7.0.tar.gz"
+  sha256 "8fbe7532df233f9b41267e819b83d43030c7ae96c32797f971a17d76aa978444"
   license "Apache-2.0"
 
   depends_on "libyaml"
@@ -21,8 +21,8 @@ class SimMirror < Formula
                 extra_packages:   %w[anyio idna typing-extensions]
 
   resource "annotated-doc" do
-    url "https://files.pythonhosted.org/packages/5a/8e/38aa427ed5402449e226975b649c5dc73ccadfefeb95e6aecb8f8ea4b6b6/annotated_doc-0.0.5.tar.gz"
-    sha256 "c7e58ce09192557605d8bbd92836d7e1d520ac9580096042c0bfd197efacf1bb"
+    url "https://files.pythonhosted.org/packages/0f/6e/a61e86e43bb6039b31a33a8f5fba76fe1cdacf3661e7b9756d4ff1b28cdc/annotated_doc-0.0.6.tar.gz"
+    sha256 "7969bb69912085b2285849c0dcac0b4b374fd180c13cf10a87f284ffcf347bbf"
   end
 
   resource "anyio" do
@@ -31,13 +31,13 @@ class SimMirror < Formula
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/c7/0e/7fa0ef50764b67090eca4114772a2abf8b6148198475e54c660b97caeee6/click-8.5.0.tar.gz"
-    sha256 "ba0d2089de75ea0310e2dde03160e6ca10009947fb95a182f9b54021bb272e34"
+    url "https://files.pythonhosted.org/packages/45/37/edbf1b0707709013c0cf2e8317e03d97ed29bf4cac709fe328904ae92a38/click-8.5.1.tar.gz"
+    sha256 "9bbfada76703fd1d784b83eea012e3e8c6a001a876543ef104fa56aaaeb072b4"
   end
 
   resource "fastapi" do
-    url "https://files.pythonhosted.org/packages/e9/eb/2cf8c80abf09b2800aef0a83b41066fbfda8ee5495b7a08b9d1af40f7046/fastapi-0.162.0.tar.gz"
-    sha256 "6a22c1e2e6e32e0633ee7e170f00009a29b8228b16feb219ee42f32fd8d88a8f"
+    url "https://files.pythonhosted.org/packages/4e/7b/ae546e10f153fcf9a6afd8b9fe4730bdfeb8fdcb93178d54122973ef3f4c/fastapi-0.162.5.tar.gz"
+    sha256 "1ca37f64f61c99cebd38636e67525fb721c5e8c1169f07f2a35d73b0a63265d4"
   end
 
   resource "grpclib" do
